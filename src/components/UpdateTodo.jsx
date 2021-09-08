@@ -23,9 +23,9 @@ export default function UpdateTodo({setEditing,updateTodo,currentTodos}) {
     return (
         <form onSubmit={handleUpdateTodo} className='mb-4'>
             <input className="form-control form-control-lg" type="text"
-             placeholder="FirstName..." value={currentTodos.firstName} name='firstName' onChange={handleChangeInputs} />
+             placeholder="FirstName..." value={todos.firstName} name='firstName' onChange={handleChangeInputs} />
             <input className="form-control form-control-lg my-2" type="text"
-             placeholder="LastName..." value={currentTodos.lastName} name='lastName' onChange={handleChangeInputs} />
+             placeholder="LastName..." value={todos.lastName} name='lastName' onChange={handleChangeInputs} />
              <button className="btn btn-primary btn-lg w-100">
              Update Todo
              </button>

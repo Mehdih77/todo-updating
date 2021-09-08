@@ -13,29 +13,32 @@ function App() {
 
   //! Set State
   const [todos, setTodos] = useState(defaultData)
+  const [editing, setEditing] = useState(false);
   // for editRow part
-  const initialTodoState = {
+  const [currentTodos, setCurrentTodos] = useState({
     id: null,
     firstName: "",
     lastName: ""
-  };
-  const [currentTodos, setCurrentTodos] = useState(initialTodoState);
-  const [editing, setEditing] = useState(false);
+  });
 
 
+  // CRUD operations
   const addTodo = (newTodo) => {
-    newTodo.id = (Math.random() * 100).toFixed(0)
+    newTodo.id = (Math.random() * 100).toFixed(0);
+
     setTodos([...todos,newTodo])
   };
   
   const removeTodo = (id) => {
     setEditing(false);
+
     setTodos(todos.filter(todo => todo.id !== id))
   };
+
   const editRow = (editTodo) => {
     setEditing(true);
 
-    setCurrentTodos({id: editRow.id, firstName: editTodo.firstName, lastName: editTodo.lastName})
+    setCurrentTodos({id: editTodo.id, firstName: editTodo.firstName, lastName: editTodo.lastName})
   };
 
   const updateTodo = (id, updatedTodo) => {
@@ -46,15 +49,20 @@ function App() {
 
   return (
     <div className="container app-content my-5">
-    {editing ? 
-    <UpdateTodo 
+    { editing ? 
+      <UpdateTodo 
       setEditing={setEditing}
       updateTodo={updateTodo}
       currentTodos={currentTodos}
-    /> 
-    : 
-    <AddTodos addTodo={addTodo} />}
-      <TodoTable todos={todos} editRow={editRow} removeTodo={removeTodo} />
+      /> 
+      : 
+      <AddTodos addTodo={addTodo} />
+      }
+
+      <TodoTable 
+       todos={todos} 
+       editRow={editRow}
+       removeTodo={removeTodo} />
     </div>
   );
 }

@@ -2,12 +2,11 @@ import { useState } from "react"
 
 export default function AddTodos({addTodo}) {
 
-    const initialTodoState = {
+    const [newTodo, setNewTodo] = useState({
         id: null,
         firstName: "",
         lastName: ""
-    };
-    const [newTodo, setNewTodo] = useState(initialTodoState)
+    })
 
     const handleChangeInputs = (e) => {
         setNewTodo({
@@ -19,7 +18,7 @@ export default function AddTodos({addTodo}) {
     const addNewTodo = (e) => {
         e.preventDefault();
         if (!newTodo.firstName || !newTodo.lastName) return
-        addTodo(newTodo)
+        addTodo(newTodo) // send newTodo it to App.js
         setNewTodo({
             id: null,
             firstName: "",
@@ -33,9 +32,9 @@ export default function AddTodos({addTodo}) {
              placeholder="FirstName..." value={newTodo.firstName} name='firstName' onChange={handleChangeInputs} />
             <input className="form-control form-control-lg my-2" type="text"
              placeholder="LastName..." value={newTodo.lastName} name='lastName' onChange={handleChangeInputs} />
-             <button className="btn btn-primary btn-lg w-100">
+            <button className="btn btn-primary btn-lg w-100">
              Add Todo
-             </button>
+            </button>
         </form>
     )
 }
